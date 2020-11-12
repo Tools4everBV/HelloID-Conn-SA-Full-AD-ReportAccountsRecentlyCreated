@@ -33,7 +33,7 @@ The PowerShell script "createform.ps1" contains a complete PowerShell script usi
  
  _Please note that this script asumes none of the required resources do exists within HelloID. The script does not contain versioning or source control_
 
-## Post-setup configuration
+### Post-setup configuration
 After the all-in-one PowerShell script has run and created all the required resources. The following items need to be configured according to your own environment
  1. Update the following [user defined variables](https://docs.helloid.com/hc/en-us/articles/360014169933-How-to-Create-and-Manage-User-Defined-Variables)
 <table>
@@ -47,7 +47,7 @@ After the all-in-one PowerShell script has run and created all the required reso
 This Delegated Form uses the following resources in order to run
 
 ### Task data source 'AD-user-generate-table-report-recently-created'
-This task data source runs an Active Directory query to select the AD user accounts that match this report. It uses an array of Active Directory OU's specified als HelloID user defined variable named _"ADusersReportOU"_ to specify the report scoping.
+This task data source runs an Active Directory query to select the AD user accounts that match this report. It uses an array of Active Directory OU's specified as HelloID user defined variable named _"ADusersReportOU"_ to specify the report scoping.
 
 ### Delegated form task 'AD-export-report-accounts-recently-created'
 This delegated form task runs the same Active Directory query as the task data source (AD query is defined at two places) and export the data to a local CSV file if selected in the form.
