@@ -1,6 +1,6 @@
 # Report Accounts Recently Created
 
-This form lists recently created AD accounts.
+This form lists AD accounts created in the last 30 days.
 
 ## Business Benefits
 
