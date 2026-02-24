@@ -1,0 +1,4 @@
+{
+    "name":  "report-ad-accounts-created-during-the-last-30-days | AD-Get-All-Accounts-Recently-Created",
+    "runInCloud":  false
+}
