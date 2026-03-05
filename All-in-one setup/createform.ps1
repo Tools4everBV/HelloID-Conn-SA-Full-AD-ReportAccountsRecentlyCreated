@@ -6,7 +6,7 @@
 $portalUrl = "https://CUSTOMER.helloid.com"
 $apiKey = "API_KEY"
 $apiSecret = "API_SECRET"
-$delegatedFormAccessGroupNames = @("") #Only unique names are supported. Groups must exist!
+$delegatedFormAccessGroupNames = @() #Only unique names are supported. Groups must exist!
 $delegatedFormCategories = @("Active Directory","Reporting") #Only unique names are supported. Categories will be created if not exists
 $script:debugLogging = $false #Default value: $false. If $true, the HelloID resource GUIDs will be shown in the logging
 $script:duplicateForm = $false #Default value: $false. If $true, the HelloID resource names will be changed to import a duplicate Form
@@ -16,9 +16,9 @@ $script:duplicateFormSuffix = "_tmp" #the suffix will be added to all HelloID re
 #NOTE: You can also update the HelloID Global variable values afterwards in the HelloID Admin Portal: https://<CUSTOMER>.helloid.com/admin/variablelibrary
 $globalHelloIDVariables = [System.Collections.Generic.List[object]]@();
 
-#Global variable #1 >> AdUsersReportOu
+#Global variable #1 >> AdReportSearchOu
 $tmpName = @'
-AdUsersReportOu
+AdReportSearchOu
 '@ 
 $tmpValue = @'
 OU=Users,OU=HelloID,DC=enyoi,DC=local;OU=Users,OU=HelloID Training,DC=enyoi,DC=local;OU=Disabled users,OU=HelloID Training,DC=enyoi,DC=local
@@ -345,7 +345,7 @@ $InformationPreference = "Continue"
 $WarningPreference = "Continue"
 
 # global variables (Automation --> Variable library):
-$searchOUs = $AdUsersReportOu
+$searchOUs = $AdReportSearchOu
 
 # variables configured in form:
 # $formValue1 = $datasource.<formElementKey>.<value>
@@ -375,8 +375,15 @@ try {
     
     if($resultCount -gt 0){
         foreach($r in $result){
-            $returnObject = @{CanonicalName=$r.CanonicalName; Displayname=$r.Displayname; UserPrincipalName=$r.UserPrincipalName; Department=$r.Department; Title=$r.Title; Enabled=$r.Enabled; whenCreated=$r.whenCreated;}
-            Write-output $returnObject
+            Write-Output @{
+                CanonicalName     = $r.CanonicalName
+                Displayname       = $r.Displayname
+                UserPrincipalName = $r.UserPrincipalName
+                Department        = $r.Department
+                Title             = $r.Title
+                Enabled           = $r.Enabled
+                whenCreated       = $r.whenCreated
+            }
         }
     } else {
         return
